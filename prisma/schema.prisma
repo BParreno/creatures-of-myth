@@ -12,3 +12,30 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Creature {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String
+  origin      String
+  skills      Skill[]   @relation("CreatureSkills")
+  weaknesses  Weakness[] @relation("CreatureWeaknesses")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Skill {
+  id          Int       @id @default(autoincrement())
+  name        String    
+  description String
+  creatureId  Int
+  creature    Creature  @relation("CreatureSkills", fields: [creatureId], references: [id])
+}
+
+model Weakness {
+  id          Int       @id @default(autoincrement())
+  name        String    
+  description String
+  creatureId  Int
+  creature    Creature  @relation("CreatureWeaknesses", fields: [creatureId], references: [id])
+}
