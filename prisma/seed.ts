@@ -61,6 +61,31 @@ async function main() {
         },
       });
 
+      const griffon = await prisma.creature.create({
+        data: {
+          name: 'Griffon',
+          description: 'A legendary creature with the body, tail, and back legs of a lion, and the head and wings of an eagle with its talons on the front legs.',
+          origin: 'Greece',
+          skills: {
+            create: [
+              {
+                name: 'Habilidad de Prueba 1',
+                description: '...',
+              },
+    // Puedes agregar más habilidades aquí
+            ],
+          },
+          weaknesses: {
+            create: [
+              {
+                name: 'Debilidad de Prueba 1',
+                description: '...',
+              },
+            ],
+          },
+        },
+      });
+
     console.log ({ hydra, hecatoncheires });
 }
 
